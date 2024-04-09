@@ -3,6 +3,9 @@ import * as Yup from "yup";
 
 import css from "../ContactForm/ContactForm.module.css";
 
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactsSlice";
+
 const ContactSchema = Yup.object().shape({
   username: Yup.string()
     .min(2, "Too Short!")
@@ -18,7 +21,7 @@ const initialValues = {
   number: "",
 };
 
-const ContactForm = ({ onAdd }) => {
+const ContactForm = () => {
   // const handleSubmit = (e) => {
   //   onAdd({
   //     id: Date.now(),
@@ -28,9 +31,16 @@ const ContactForm = ({ onAdd }) => {
   //   e.resetForm();
   // };
 
-  const handleSubmit = (values, { resetForm }) => {
-    onAdd({ ...values });
-    resetForm();
+  const dispatch = useDispatch();
+
+  const handleSubmit = (values, actions) => {
+    dispatch(
+      addContact({
+        name: values.username,
+        number: values.number,
+      })
+    );
+    actions.resetForm();
   };
 
   return (
