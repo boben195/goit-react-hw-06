@@ -1,27 +1,27 @@
-import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsSlice";
-
 import { ImAccessibility } from "react-icons/im";
 import { FaPhoneAlt } from "react-icons/fa";
 
 import css from "../Contact/Contact.module.css";
 
-const Contact = ({ contacts }) => {
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/contactsSlice";
+
+const Contact = ({ contact }) => {
   const dispatch = useDispatch();
-  const delContact = () => {
+  const handleDelete = () => {
     dispatch(deleteContact(contact.id));
   };
   return (
     <div>
       <p>
         <ImAccessibility className={css.icons} />
-        {contacts}
+        {contact.username}
       </p>
       <p>
         <FaPhoneAlt className={css.icons} />
-        {contacts}
+        {contact.number}
       </p>
-      <button className={css.del} onClick={delContact}>
+      <button className={css.del} onClick={handleDelete}>
         delete
       </button>
     </div>

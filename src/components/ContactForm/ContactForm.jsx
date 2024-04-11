@@ -30,17 +30,12 @@ const ContactForm = () => {
   //   });
   //   e.resetForm();
   // };
-
   const dispatch = useDispatch();
+  // const contacts = useSelector(selectContacts);
 
-  const handleSubmit = (values, actions) => {
-    dispatch(
-      addContact({
-        name: values.username,
-        number: values.number,
-      })
-    );
-    actions.resetForm();
+  const handleSubmit = (values, { resetForm }) => {
+    dispatch(addContact({ id: Date.now(), ...values }));
+    resetForm();
   };
 
   return (
